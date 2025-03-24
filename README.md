@@ -6,10 +6,11 @@ This guide assumes a dual environment setup, `dev` and `prod`, which correspond 
 We will initially design the repository to support only a single function. Although efforts will be made to structure the workflow in a way to allow for multiple functions within this repository as a future enhancement. 
 
 ## Prerequisites
+- A Github repository
 - Azure Function Creator permissions
 - Visual Studio Code
 - Python version between 3.0 and 3.11 (as of 03/25 3.12 is incompatible with some Microsoft Azure Libraries)
-- A Github repository
+
 
 ## Project Structure
 |-- hello-world (repository)
@@ -20,7 +21,7 @@ We will initially design the repository to support only a single function. Altho
 |           |__ hello-world-action
 |               └── action.yml
 |   |__ src
-|       └── test-fn
+|       └── demo-fn
 |           └── 
 
 
