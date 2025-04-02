@@ -7,3 +7,5 @@ prod
 -
 key vault: demo-kv-prod
 fn: demo-fn-prod
+
+trigger
