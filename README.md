@@ -9,21 +9,24 @@ We will initially design the repository to support only a single function. Altho
 - A Github repository
 - Azure Function Creator permissions
 - Visual Studio Code
+- Github Actions VS Code Ext
+- Azure Function VS Code Ext
 - Python version between 3.0 and 3.11 (as of 03/25 3.12 is incompatible with some Microsoft Azure Libraries)
 
-
 ## Project Structure
-|-- hello-world (repository)
-|   |__ .github
-|       └── workflows
-|           └── workflow.yml
-|       └── actions
-|           |__ hello-world-action
-|               └── action.yml
-|   |__ src
-|       └── demo-fn
-|           └── 
-
+```
+├── github-pipeline
+|   ├── .git (repository base)
+|   ├── .github
+|   |   ├── workflows
+|   |   |   ├── workflow.yml
+|   |   ├── actions
+|   |   |   ├── hello-world-action
+|   |   |   |   ├── action.yml
+|   ├── src
+|   |   ├── demo-fn
+|   |   |   ├── function-app.py 
+```
 
 ## Azure resource configuration
 - Create functions with naming scheme `[name]-fn-prod` and `[name]-fn-dev`
