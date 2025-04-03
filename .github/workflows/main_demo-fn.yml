@@ -5,6 +5,8 @@ on:
     branches:
       - dev
       - main
+    paths:
+      - 'src/**'
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'demo-fn-dev'

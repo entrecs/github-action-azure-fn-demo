@@ -3,47 +3,43 @@ This repository is intended to serve as an instructional starting point for deve
 
 This guide assumes a dual environment setup, `dev` and `prod`, which correspond to the git branches `dev` and `main`, respectively. Note that the terms "dev" and "test" may be used interchangably within this guide when not referring directly to git branches.
 
-We will initially design the repository to support only a single function. Although efforts will be made to structure the workflow in a way to allow for multiple functions within this repository as a future enhancement. 
+## Workflows
 
-## Prerequisites
-- A Github repository
-- Azure Function Creator permissions
-- Visual Studio Code
-- Github Actions VS Code Ext
-- Azure Function VS Code Ext
-- Python version between 3.0 and 3.11 (as of 03/25 3.12 is incompatible with some Microsoft Azure Libraries)
+### Triggers
+This repository uses GitHub Actions workflows to automate deployments. The workflows are triggered based on branch activity:
+- **Push to `dev` branch**:
+  - Deploys the function to the **staging slot** (`demo-fn-dev/stage`).
+- **Push to `main` branch**:
+  - Deploys the function to the **production slot** (`demo-fn-dev`).
+  - This *should* only be done via an approved merge request from the `dev` branch which can be enforced by disallowing direct pushes to `main` at the Github Repository Settings level
 
-## Project Structure
-```
-├── github-pipeline
-|   ├── .git (repository base)
-|   ├── .github
-|   |   ├── workflows
-|   |   |   ├── workflow.yml
-|   |   ├── actions
-|   |   |   ├── hello-world-action
-|   |   |   |   ├── action.yml
-|   ├── src
-|   |   ├── demo-fn
-|   |   |   ├── function-app.py 
-```
+### Deployment Process
+1. **Dependency Installation**:
+   - The workflow installs Python dependencies specified in `requirements.txt` using `pip`.
+2. **Packaging**:
+   - The function app is packaged, including the `host.json`, `HttpTrigger` directory, and dependencies.
+3. **Deployment**:
+   - The function app is deployed to the appropriate Azure Function App slot using the publish profile:
+     - `AZURE_FUNCTIONAPP_PUBLISH_PROFILE_STAGE` for the `stage` slot.
+     - `AZURE_FUNCTIONAPP_PUBLISH_PROFILE_PROD` for the production slot.
 
-## Azure resource configuration
-- Create functions with naming scheme `[name]-fn-prod` and `[name]-fn-dev`
-- Within `Deployment` tab of function creation flow, authorize Continuous Deployment for this repository
-- Ensure `SCM Basic Auth Publishing` setting is enabled via `Settings > Configuration` menu
-- From function home page, download publish profiles by clicking `Get publish profile` 
+---
 
-## Github Repository
-### Branches
-- `main` pushes to production fn and is the default github branch
-- `dev` pushes to test fn and will need to be created upon repository initialization
-### Upload publish profiles
-Publish profiles for dev function and prod function
+## Local Development
 
+### Library prerequisites
+- [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) (v4 or later)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 
-## Function app
-See readme within function_home directory (`src/test_fn`) for details on basic azure function development.
+### Environment Configuration
+The function app requires the following environment variables:
 
-## Continuous Integration via Github Actions
-The 
+- `KEY_VAULT_URL`: The URL of the Azure Key Vault
+- `SECRET_NAME`: The name of the secret to retrieve from the Key Vault.
+- These variables can be set in `local.settings.json`:
+
+### Running locally
+1. cd to `src/demo-fn` directory
+2. start locally with `func start`
+3. navigate to `http://localhost:7071/api/HttpTrigger` 
+
