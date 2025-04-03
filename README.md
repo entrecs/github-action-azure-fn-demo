@@ -1,9 +1,11 @@
 # Github Action to Azure Fn Demo
 This repository is intended to serve as an instructional starting point for developing source-controlled Azure Python Functions with automated deployment actions.
 
-This guide assumes a dual environment setup, `dev` and `prod`, which correspond to the git branches `dev` and `main`, respectively. Note that the terms "dev" and "test" may be used interchangably within this guide when not referring directly to git branches.
+This guide assumes a dual environment setup, `dev` and `prod`, which correspond to the git branches `dev` and `main`, respectively, as well as development and production deployment slots in an Azure Function App.
 
 ## Workflows
+
+![Workflow diagram](workflow-diagram.png)
 
 ### Triggers
 This repository uses GitHub Actions workflows to automate deployments. The workflows are triggered based on branch activity:
