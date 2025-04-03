@@ -1,5 +1,5 @@
 # Github Action to Azure Fn Demo
-This repository is intended to serve as an instructional starting point for developing source-controlled Azure Python Functions with automated deployment actions.
+This repository is intended to serve as a starting point for one possible way of developing source-controlled Azure Python Functions with automated deployment actions. 
 
 This guide assumes a dual environment setup, `dev` and `prod`, which correspond to the git branches `dev` and `main`, respectively, as well as development and production deployment slots in an Azure Function App.
 
