@@ -26,7 +26,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         secret = client.get_secret(secret_name)
 
         return func.HttpResponse(
-            f"The value of the secret '{secret_name}' is:\n\n\n{secret.value}",
+            f"The value of the SECRET '{secret_name}' is:\n\n\n{secret.value}",
             status_code=200,
         )
     except Exception as e:
